@@ -6,10 +6,12 @@ const createBlog=require('./routes/createblog')
 
 env.config()
 const app=express()
-const port= 5000 ||process.env.MONGO_URI
+const port= 5000 ||process.env.PORT
 
 mongoose.set('strictQuery', true);
-mongoose.connect(process.env.MONGO_URI,{useNewUrlParser:true,useUnifiedTopology:true},()=>{console.log('connected')})
+mongoose.connect(process.env.MONGO_URI,{useNewUrlParser:true,useUnifiedTopology:true})
+.then(()=>{console.log('connected to database')})
+.catch((e)=>{console.log(e)})
 
 
 app.use(express.json())
